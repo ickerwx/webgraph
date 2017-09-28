@@ -1,0 +1,39 @@
+#! /usr/bin/env python2
+
+import argparse
+from BeautifulSoup import BeautifulSoup
+import requests
+import sys
+import networkx as nx
+import matplotlib.pyplot as plt
+
+
+class Node:
+    def __init__(self, url, depth):
+        self.url = url
+        self.name = url
+        self.depth = depth
+        self.childNodes = []
+        self.external = False
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(description=('Creates graphs of resources and links of a given URL. It can spider '
+                                                  'until a given depth is reached, and can optionally follow links to '
+                                                  'other hosts.'))
+    parser.add_argument('targeturl', nargs='?', help='URL you want to map', metavar='TARGETURL')
+    parser.add_argument('-l', '--limit', help='maximum spider depth limit', type=int, default=1)
+    parser.add_argument('-f', '--follow', help='follow links to other hosts', default=False, action='store_true')
+    parser.add_argument('-n', '--hostnames', help='only print hostnames', default=False, action='store_true', )
+    parser.add_argument('-t', '--text', help='print the results as text', default=False, action='store_true', )
+    parser.add_argument('-v', '--verbose', help='', action='count', default=0)
+
+    return parser.parse_args()
+
+
+def main():
+    args = parse_args()
+
+
+if __name__ == "__main__":
+    main()
